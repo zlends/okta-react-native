@@ -27,6 +27,7 @@ import {
   revokeAccessToken,
   revokeIdToken,
   clearTokens,
+  getUserFromIdToken
 } from '@okta/okta-react-native';
 
 export default class ProfilePage extends React.Component {
@@ -35,7 +36,8 @@ export default class ProfilePage extends React.Component {
 
     this.state = { 
       idToken: props.route.params.idToken,
-      isBrowserScenario: props.route.params.isBrowserScenario
+      isBrowserScenario: props.route.params.isBrowserScenario,
+
     };
   }
 
@@ -56,10 +58,25 @@ export default class ProfilePage extends React.Component {
       });
   }
 
+  getUserIdToken = () => {
+    getUserFromIdToken().then(() => {
+      this.setState({ idToken: user });
+    }).catch(error => {
+      console.log(error);
+    });;
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text testID="welcome_text">Welcome back, {this.state.idToken.preferred_username}!</Text>
+        <Text testID="welcome_text">Welcome back, {this.state.idToken.name}!</Text>
+        <Button
+          onPress={async () => {
+            this.getUserIdToken();
+          }}
+          title="Get ID Token"
+        />
+
         <Button 
           onPress={this.logout}
           title="Logout"
