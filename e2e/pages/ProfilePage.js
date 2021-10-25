@@ -59,8 +59,8 @@ export default class ProfilePage extends React.Component {
   }
 
   getUserIdToken = () => {
-    getUserFromIdToken().then(() => {
-      this.setState({ idToken: user });
+    getUserFromIdToken().then((token) => { 
+      this.setState({ idToken: token });
     }).catch(error => {
       console.log(error);
     });;
@@ -70,6 +70,7 @@ export default class ProfilePage extends React.Component {
     return (
       <View style={styles.container}>
         <Text testID="welcome_text">Welcome back, {this.state.idToken.name}!</Text>
+        <Text testID="id_token_text">ID Token: {JSON.stringify(this.state.idToken, null, 4)}</Text>
         <Button
           onPress={async () => {
             this.getUserIdToken();
