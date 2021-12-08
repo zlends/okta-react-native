@@ -160,6 +160,7 @@ This method will create a configured client on the native modules. Resolves `tru
 * `browserMatchAll` is an optional field in config, and is used only by _Android_ to match all Chrome Custom Tabs browsers.
 * `httpConnectionTimeout` is an optional field in config, represented in seconds. Available on _iOS_ and _Android_.
 * `httpReadTimeout` is an optional field in config, represented in seconds. Available only on _Android_.
+* `additionalRequestParameters` is an optional object with set of the [request parameters](https://developer.okta.com/docs/reference/api/oidc/#request-parameters) to the `/authorize` endpoint.
 
 ```javascript
 await createConfig({
@@ -174,6 +175,7 @@ await createConfig({
   browserMatchAll: true, // Optional
   httpConnectionTimeout: 15, // Optional
   httpReadTimeout: 10, // Optional
+  additionalRequestParameters: { login_hint: 'youremail@okta.com' }, // Optional
 });
 ``` 
 

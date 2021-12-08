@@ -66,7 +66,8 @@ export const createConfig = async({
   httpConnectionTimeout,
   httpReadTimeout,
   browserMatchAll = false,
-  oktaAuthConfig = {}
+  oktaAuthConfig = {},
+  additionalRequestParameters = {},
 }) => {
 
   assertIssuer(discoveryUri);
@@ -112,6 +113,7 @@ export const createConfig = async({
       scopes,
       userAgentTemplate,
       httpConnectionTimeout,
+      additionalRequestParameters
     );
   }
 

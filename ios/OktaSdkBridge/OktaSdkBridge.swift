@@ -87,19 +87,23 @@ class OktaSdkBridge: RCTEventEmitter {
                       scopes: String,
                       userAgentTemplate: String,
                       requestTimeout: Int,
+                      additionalParameters: [String: String],
                       promiseResolver: RCTPromiseResolveBlock,
                       promiseRejecter: RCTPromiseRejectBlock) {
         do {
             let uaVersion = OktaUserAgent.userAgentVersion()
             let userAgent = userAgentTemplate.replacingOccurrences(of: "$UPSTREAM_SDK", with: "okta-oidc-ios/\(uaVersion)")
             OktaOidcConfig.setUserAgent(value: userAgent)
-            let config = try OktaOidcConfig(with: [
+            
+            let configParameters = [
                 "issuer": discoveryUri,
                 "clientId": clientId,
                 "redirectUri": redirectUrl,
                 "logoutRedirectUri": endSessionRedirectUri,
                 "scopes": scopes
-            ])
+            ].merging(additionalParameters) { current, new in current }
+            
+            let config = try OktaOidcConfig(with: configParameters)
             
             config.requestCustomizationDelegate = self
             

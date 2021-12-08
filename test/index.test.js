@@ -158,6 +158,31 @@ describe('OktaReactNative', () => {
         processedScope,
         `okta-react-native/${version} $UPSTREAM_SDK react-native/${reactNativeVersion} ios/1.0.0`,
         defaultTimeouts.httpConnectionTimeout,
+        { }
+      );
+    });
+
+    it('passes in correct parameters on ios device with additional parameters', () => {
+      Platform.OS = 'ios';
+      Platform.Version = '1.0.0';
+      const processedScope = config.scopes.join(' ');
+      const configWithParameters = {
+        ...config,
+        additionalRequestParameters: { prompt: 'login' }
+      };
+      
+      createConfig(configWithParameters);
+
+      expect(mockCreateConfig).toHaveBeenCalledTimes(1);
+      expect(mockCreateConfig).toHaveBeenCalledWith(
+        config.clientId,
+        config.redirectUri,
+        config.endSessionRedirectUri,
+        config.discoveryUri,
+        processedScope,
+        `okta-react-native/${version} $UPSTREAM_SDK react-native/${reactNativeVersion} ios/1.0.0`,
+        defaultTimeouts.httpConnectionTimeout,
+        { prompt: 'login' }
       );
     });
 

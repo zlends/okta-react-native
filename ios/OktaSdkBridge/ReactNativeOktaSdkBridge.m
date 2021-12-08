@@ -16,14 +16,15 @@
 
 RCT_EXTERN_METHOD(
   createConfig:
-  (NSString *)clientId 
-  redirectUrl:(NSString *)redirectUrl 
-  endSessionRedirectUri:(NSString *)endSessionRedirectUri 
-  discoveryUri:(NSString *)discoveryUri 
-  scopes:(NSString *)scopes 
+  (NSString *)clientId
+  redirectUrl:(NSString *)redirectUrl
+  endSessionRedirectUri:(NSString *)endSessionRedirectUri
+  discoveryUri:(NSString *)discoveryUri
+  scopes:(NSString *)scopes
   userAgentTemplate:(NSString *)userAgentTemplate
   requestTimeout:(NSInteger)requestTimeout
-  promiseResolver:(RCTPromiseResolveBlock *)promiseResolver 
+  additionalParameters:(NSDictionary *)parameters
+  promiseResolver:(RCTPromiseResolveBlock *)promiseResolver
   promiseRejecter:(RCTPromiseRejectBlock *)promiseRejecter
 )
 
