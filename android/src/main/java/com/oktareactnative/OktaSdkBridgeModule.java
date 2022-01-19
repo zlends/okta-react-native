@@ -187,6 +187,9 @@ public class OktaSdkBridgeModule extends ReactContextBaseJavaModule implements A
         }
 
         AuthenticationPayload.Builder payloadBuilder = new AuthenticationPayload.Builder();
+        if (options.hasKey("username")) {
+            payloadBuilder.addParameter("username", options.getString("username"));
+        }  
         if (options.hasKey("idp")) {
             payloadBuilder.setIdp(options.getString("idp"));
         }
